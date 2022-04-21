@@ -1,8 +1,10 @@
 kind: Pod
 apiVersion: v1
 metadata:
-  name: secrets-store-inline
+  name: busybox
+  namespace: demo
 spec:
+  serviceAccountName: app-sa
   containers:
   - image: k8s.gcr.io/e2e-test-images/busybox:1.29
     name: busybox
@@ -10,14 +12,28 @@ spec:
     command:
     - "/bin/sleep"
     - "10000"
+    resources:
+      requests:
+        cpu: 100m
+        memory: 50Mi
+      limits:
+        cpu: 200m
+        memory: 100Mi
     volumeMounts:
-    - name: secrets-store-inline
+    - name: vault-database
       mountPath: "/mnt/secrets-store"
       readOnly: true
+    # Uncomment after syncing the Vault data with a Kubernetes Secret  
+    # env:
+    # - name: API_TOKEN
+    #   valueFrom:
+    #     secretKeyRef:
+    #       name: kvsecret-1
+    #       key: token
   volumes:
-    - name: secrets-store-inline
+    - name: vault-database
       csi:
         driver: secrets-store.csi.k8s.io
         readOnly: true
         volumeAttributes:
-          secretProviderClass: "vault-foo"
+          secretProviderClass: "vault-database"

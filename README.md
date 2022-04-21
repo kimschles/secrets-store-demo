@@ -7,10 +7,17 @@ Notes:
 - [Dok Talks #128- Getting Started with the Kubernetes Secrets Store CSI Driver](https://www.meetup.com/Data-on-Kubernetes-community/events/285208289/)
 
 ## Prerequisites 
+- A Kubernetes Cluster 
 - Helm 3 
+
 
 
 ## Resources 
 - [Secrets Store CSI Driver Documentation](https://secrets-store-csi-driver.sigs.k8s.io/introduction.html)
+- [Kubernetes CSI Developer Documentation](https://kubernetes-csi.github.io/docs/ephemeral-local-volumes.html)
 - [HashiCorp Learn: Mount Vault Secrets through Container Storage Interface (CSI) Volume](https://learn.hashicorp.com/tutorials/vault/kubernetes-secret-store-driver)
 - [Kubernetes Auth Method](https://www.vaultproject.io/docs/auth/kubernetes)
+
+
+
+
