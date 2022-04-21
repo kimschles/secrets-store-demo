@@ -119,7 +119,7 @@ Install the Secrets Store CSI Driver in the `demo` namespace and enable secret s
 
 ```sh
 helm install csi-secrets-store secrets-store-csi-driver/secrets-store-csi-driver --namespace demo \
---set syncSecret.enabled=true \
+--set syncSecret.enabled=true
 ``` 
 
 ## 6. Create new Kubernetes Objects so Your App Can Use the CSI Driver to Create an Ephemeral Volume 
@@ -162,7 +162,7 @@ Check that the `ENV` var is set.
 Exec into the busybox pod 
 
 ```sh
-kubectl exec busybox -demo -it -- /bin/sh
+kubectl exec busybox -n demo -it -- /bin/sh
 ```
 
 Check that the `API_TOKEN` `ENV` Var exists
