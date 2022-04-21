@@ -29,7 +29,7 @@ helm repo update hashicorp
 
 Install a [dev-server](https://www.vaultproject.io/docs/concepts/dev-server) instance of Hashicorp Vault in the `demo` namespace. 
 
-Note: In this tutorial, Vault is running inside the Kubernetes cluster. It is possible to setup an external instance outside of cluster. If you'd like to connect an External Vault to your cluster, check out HashiCorp Learn's Guide [How Integrate a Kubernetes Cluster with an External Vault](https://learn.hashicorp.com/tutorials/vault/kubernetes-external-vault)
+Note: In this tutorial, Vault is running inside the Kubernetes cluster. It is possible to setup an external instance outside of cluster. If you'd like to connect an External Vault to your cluster, check out HashiCorp Learn's Guide [How Integrate a Kubernetes Cluster with an External Vault](https://learn.hashicorp.com/tutorials/vault/kubernetes-external-vault).
 
 ``` sh
 helm install vault hashicorp/vault -n demo \
@@ -76,7 +76,7 @@ kubernetes_host="https://$KUBERNETES_PORT_443_TCP_ADDR:443" \
 kubernetes_ca_cert=@/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
 ```
 
-Create a policy called 'app-permissions' that will allow the SSCD to read the mounts and the secrets itself. 
+Create a policy called 'app-permissions' that will allow the SSCD to read the mounts and the secret itself. 
 
 ```sh 
 vault policy write app-permissions - <<EOF
@@ -146,17 +146,13 @@ The secret content is mounted on pod start. You can check by exec'ing into the b
 
 ## 7. Sync the as a Kubernetes Secret and set as an `ENV` var in your application pod
 
-Configure the `secretObjects` block in the `SecretProviderClass` 
-
-Uncomment out the `secretObjects` block in manifests/secret-provider-class.yaml and then run 
+Configure the `secretObjects` block in the `SecretProviderClass` by removing the comments the `secretObjects` block in manifests/secret-provider-class.yaml. Then run
 
 ```sh
 kubectl apply -f manifests/secret-provider-class.yaml
 ```
 
-Add the secret as an `ENV` var in your application pod. 
-
-Uncomment out the `env` block in block in manifests/deployment.yaml and then run 
+Add the secret as an `ENV` var in your application pod by removing the comments from `env` block in manifests/deployment.yaml and then run 
 
 ```sh
 kubectl apply -f manifests/deployment.yaml
@@ -173,6 +169,12 @@ Check that the `API_TOKEN` `ENV` Var exists
 
 ```sh
 echo $API_TOKEN
+```
+
+Exit out of the `busybox` pod
+
+```sh
+exit
 ```
 
 Pat your self on the back. You're done! 🎉
